@@ -3,6 +3,7 @@ import App from "../layouts/App";
 import EventDashboard from "../../features/events/dashboard/EventDashboard";
 import EventDetailedPage from "../../features/events/details/EventDetailedPage";
 import EventForm from "../../features/form/EventForm";
+import Scratch from "../../features/scratch/scratch";
 
 export const router = createBrowserRouter([
   {
@@ -11,8 +12,9 @@ export const router = createBrowserRouter([
     children: [
       { path: "/events", element: <EventDashboard /> },
       { path: "/events/:id", element: <EventDetailedPage /> },
-      { path: "/manage/id", element: <EventForm /> },
+      { path: "/manage/:id", element: <EventForm /> },
       { path: "/createEvent", element: <EventForm /> },
+      { path: "/scratch", element: <Scratch /> },
     ],
   },
 ]);
