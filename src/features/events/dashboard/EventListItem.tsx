@@ -1,26 +1,21 @@
 import {
+  Button,
+  Icon,
   Item,
   ItemGroup,
+  List,
   Segment,
   SegmentGroup,
-  Icon,
-  List,
-  Button,
 } from "semantic-ui-react";
 import EventListAttendee from "./EventListAttendee";
+import { Link } from "react-router-dom";
 import { AppEvent } from "../../../app/types/events";
 
 type Props = {
   event: AppEvent;
-  selectEvent: (event: AppEvent) => void;
-  deleteEvent: (eventId: string) => void;
 };
 
-export default function EventListItem({
-  event,
-  selectEvent,
-  deleteEvent,
-}: Props) {
+export default function EventListItem({ event }: Props) {
   return (
     <SegmentGroup>
       <Segment>
@@ -38,12 +33,12 @@ export default function EventListItem({
           </Item>
         </ItemGroup>
       </Segment>
-      <span>
-        <Icon name="clock" />
-        {event.date}
-        <Icon name="marker" />
-        {event.venue}
-      </span>
+      <Segment>
+        <span>
+          <Icon name="clock" /> {event.date}
+          <Icon name="marker" /> {event.venue}
+        </span>
+      </Segment>
       <Segment secondary>
         <List horizontal>
           {event.attendees.map((attendee: any) => (
@@ -53,17 +48,13 @@ export default function EventListItem({
       </Segment>
       <Segment clearing>
         <span>{event.description}</span>
+        <Button color="red" floated="right" content="Delete" />
         <Button
-          color="red"
-          floated="right"
-          content="Delete"
-          onClick={() => deleteEvent(event.id)}
-        />
-        <Button
+          as={Link}
+          to={`/events/${event.id}`}
           color="teal"
           floated="right"
           content="View"
-          onClick={() => selectEvent(event)}
         />
       </Segment>
     </SegmentGroup>
